@@ -7,7 +7,9 @@ import multiprocessing
 import multiprocessing.dummy
 
 
+
 def ping_it(hostname):
+    #global worlds
     try:
         p = subprocess.check_output(["ping.exe",hostname])
         a = p.split('\n')[-2]
@@ -29,13 +31,15 @@ def ping_worlds(values):
     p = multiprocessing.dummy.Pool(num_threads)
     p.map(ping_it, ['oldschool' + str(i) + '.runescape.com' for i in values])
 
-def how_many_worlds(how_many, worlds):
+def how_many_worlds(how_many):
     worlds.sort()
     print 'The best '+ how_many + ' worlds to connect are:'
     for elem in worlds[:int(how_many)]:
         ping1, world = elem
         world = world[9:]
         print 'world', world, 'with (', ping1 + ' ms)', 'average.'
+
+worlds = list()
 
 if __name__ == '__main__':
 
@@ -50,9 +54,8 @@ if __name__ == '__main__':
     worldtype = raw_input("Please write the type of world you're searhcing for: ")
     print '***Pinging ***'
     t = time.time()
-    worlds = list()
     help = False
-
+    worlds = list()
     if worldtype == 'help':
         help = True
 

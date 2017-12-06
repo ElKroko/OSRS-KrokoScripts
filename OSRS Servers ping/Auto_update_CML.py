@@ -1,7 +1,7 @@
 import urllib
 import time
 
-def open(username):
+def open_link(username):
     return urllib.urlopen('https://crystalmathlabs.com/tracker/update.php?player='+username)
 
 def str_to_username(str):
